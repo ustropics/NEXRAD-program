@@ -8,7 +8,7 @@ import metpy.plots as mpplots
 import numpy as np
 import sys
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 from ipywidgets import interact, interactive, fixed, interact_manual, Label
 from matplotlib.animation import ArtistAnimation
 from siphon.radarserver import RadarServer
