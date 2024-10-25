@@ -28,7 +28,7 @@ def create_plot(widget_box):
     ax = new_map(fig, data.StationLongitude, data.StationLatitude)
 
     # Set limits in lat/lon space
-    ax.set_extent([-85.5, -79, 25, 30.11])
+    ax.set_extent([lon_1, lon_2, lat_1, lat_2])
 
     # Add map features
     ax.add_feature(cfeature.NaturalEarthFeature('physical', 'land', '50m', edgecolor='face', facecolor='#020514'))

@@ -20,10 +20,10 @@ def create_widgets():
     widget_end_time = widgets.Dropdown(layout={'width': 'initial'}, options=time_list)
     
     # Latitude and longitude widgets
-    lon1 = widgets.FloatText(value=7.5, description='Longitudes:', disabled=False, layout=Layout(width='140px'))
-    lon2 = widgets.FloatText(value=7.5, disabled=False, layout=Layout(width='50px'))
-    lat1 = widgets.FloatText(value=7.5, description='Latitudes:', disabled=False, layout=Layout(width='140px'))
-    lat2 = widgets.FloatText(value=7.5, disabled=False, layout=Layout(width='50px'))
+    lon1 = widgets.FloatText(value=-85.5, description='Longitudes:', disabled=False, layout=Layout(width='140px'))
+    lon2 = widgets.FloatText(value=-79, disabled=False, layout=Layout(width='50px'))
+    lat1 = widgets.FloatText(value=25, description='Latitudes:', disabled=False, layout=Layout(width='140px'))
+    lat2 = widgets.FloatText(value=30.11, disabled=False, layout=Layout(width='50px'))
     
     
     # Organize the widgets into layouts
