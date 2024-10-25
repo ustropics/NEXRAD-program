@@ -20,11 +20,10 @@ def widget_values(widget_box):
     end_date = widget_box.children[2].children[0].value
     end_time = widget_box.children[2].children[1].value
 
-    if start_time and end_time == '00:00':
-        current_minutes = datetime.now().minute
-        start_time = round(current_minutes / 5) * 5
-        end_time = start_time + 30
-
+    # if start_time and end_time == '00:00':
+    #     current_minutes = datetime.now().minute
+    #     start_time = round(current_minutes / 5) * 5
+    #     end_time = start_time + 30
 
     start_year = start_date.year
     start_month = start_date.month
@@ -39,12 +38,12 @@ def widget_values(widget_box):
     dt1 = datetime(start_year, start_month, start_day, start_time.hour, start_time.minute)
     dt2 = datetime(end_year, end_month, end_day, end_time.hour, end_time.minute)
 
-    lon_1 = widget_box.children[3].children[0].value
-    lon_2 = widget_box.children[3].children[1].value
+    lon_1 = widget_box.children[4].children[0].value
+    lon_2 = widget_box.children[4].children[1].value
     lon_3 = widget_box.children[7].value
 
-    lat_1 = widget_box.children[4].children[0].value
-    lat_2 = widget_box.children[4].children[1].value
+    lat_1 = widget_box.children[5].children[0].value
+    lat_2 = widget_box.children[5].children[1].value
     lat_3 = widget_box.children[8].value
 
     return dt1, dt2, lon_1, lon_2, lon_3, lat_1, lat_2, lat_3
