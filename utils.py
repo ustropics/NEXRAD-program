@@ -5,20 +5,26 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 def widget_values(widget_box):
-#   print(widget_box.children[1].children[0].value)
-#   print(widget_box.children[1].children[1].value)
-#   print(widget_box.children[2].children[0].value)
-#   print(widget_box.children[2].children[1].value)
-#   print(widget_box.children[3].children[0].value)
-#   print(widget_box.children[3].children[1].value)
-#   print(widget_box.children[4].children[0].value)
-#   print(widget_box.children[4].children[1].value)
+    #   print(widget_box.children[1].children[0].value)
+    #   print(widget_box.children[1].children[1].value)
+    #   print(widget_box.children[2].children[0].value)
+    #   print(widget_box.children[2].children[1].value)
+    #   print(widget_box.children[3].children[0].value)
+    #   print(widget_box.children[3].children[1].value)
+    #   print(widget_box.children[4].children[0].value)
+    #   print(widget_box.children[4].children[1].value)
 
     start_date = widget_box.children[1].children[0].value
     start_time = widget_box.children[1].children[1].value
 
     end_date = widget_box.children[2].children[0].value
     end_time = widget_box.children[2].children[1].value
+
+    if start_time and end_time == '00:00':
+        current_minutes = datetime.now().minute
+        start_time = round(current_minutes / 5) * 5
+        end_time = start_time + 30
+
 
     start_year = start_date.year
     start_month = start_date.month

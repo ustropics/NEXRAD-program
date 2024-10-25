@@ -12,6 +12,9 @@ import matplotlib.pyplot as plt
 def create_plot(widget_box):
     dt1, dt2, lon_1, lon_2, lat_1, lat_2 = widget_values(widget_box)
 
+    if dt1 == dt2:
+        dt2 = dt1 + timedelta(minutes=30)
+
     # Load in radar data and variables
     rs = RadarServer('http://tds-nexrad.scigw.unidata.ucar.edu/thredds/radarServer/nexrad/level2/S3/')  # Access THREDDS for data files
     query = rs.query()
