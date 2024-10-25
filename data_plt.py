@@ -10,7 +10,7 @@ import cartopy.feature as cfeature
 import matplotlib.pyplot as plt
 
 def create_plot(widget_box):
-    dt1, dt2, lon_1, lon_2, lat_1, lat_2 = widget_values(widget_box)
+    dt1, dt2, lon_1, lon_2, lon_3, lat_1, lat_2, lat_3 = widget_values(widget_box)
 
     if dt1 == dt2:
         dt2 = dt1 + timedelta(minutes=30)
