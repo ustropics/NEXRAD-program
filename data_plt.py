@@ -18,7 +18,7 @@ def create_plot(widget_box):
     # Load in radar data and variables
     rs = RadarServer('http://tds-nexrad.scigw.unidata.ucar.edu/thredds/radarServer/nexrad/level2/S3/')  # Access THREDDS for data files
     query = rs.query()
-    query.lonlat_point(-82.81, 27.597).time_range(dt1, dt1 + timedelta(hours=1))
+    query.lonlat_point(-82.8, 27.6).time_range(dt1, dt1 + timedelta(hours=1))
     ref_norm, ref_cmap = mpplots.ctables.registry.get_with_steps('NWSReflectivity', 5, 5)
 
     cat = rs.get_catalog(query)

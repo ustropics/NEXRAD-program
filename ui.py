@@ -9,7 +9,8 @@ def create_widgets():
                  for hour in range(24) for minute in range(0, 60, 5)]
     
     label1 = widgets.Label(value='Select the start and end date/time for the radar loop:')
-    label2 = widgets.Label(value='Select the latitude and longitude extent for the radar loop:')
+    label2 = widgets.Label(value='Set the latitude and longitude extent for the map output:')
+    label3 = widgets.Label(value='Set the latitude and longitude center position for the radar:')
     
     # Start date and time widgets
     widget_start_date = widgets.DatePicker(layout={'width': 'initial'}, description='Start Date/Time', disabled=False, value=dt.date.today())
@@ -20,10 +21,13 @@ def create_widgets():
     widget_end_time = widgets.Dropdown(layout={'width': 'initial'}, options=time_list)
     
     # Latitude and longitude widgets
-    lon1 = widgets.FloatText(value=-85.5, description='Longitudes:', disabled=False, layout=Layout(width='140px'))
-    lon2 = widgets.FloatText(value=-79, disabled=False, layout=Layout(width='50px'))
-    lat1 = widgets.FloatText(value=25, description='Latitudes:', disabled=False, layout=Layout(width='140px'))
-    lat2 = widgets.FloatText(value=30.11, disabled=False, layout=Layout(width='50px'))
+    lon1 = widgets.FloatText(value=-85.5, description='Longitudes:', disabled=False, layout=Layout(width='180px'))
+    lon2 = widgets.FloatText(value=-79, disabled=False, layout=Layout(width='60px'))
+    lat1 = widgets.FloatText(value=25, description='Latitudes:', disabled=False, layout=Layout(width='180px'))
+    lat2 = widgets.FloatText(value=30.11, disabled=False, layout=Layout(width='60px'))
+
+    lon3 = widgets.FloatText(value=-82.81, description='Longitude:', disabled=False, layout=Layout(width='180px'))
+    lat3 = widgets.FloatText(value=27.597, description='Latitude:', disabled=False, layout=Layout(width='180px'))
     
     
     # Organize the widgets into layouts
@@ -33,4 +37,4 @@ def create_widgets():
     lat_box = widgets.HBox([lat1, lat2], layout=Layout(justify_content='flex-start'))
     
     # Return the complete widget box layout
-    return widgets.VBox([label1, start, end, lon_box, lat_box])
+    return widgets.VBox([label1, start, end, label2, lon_box, lat_box, label3, lon3, lat3], layout=Layout(justify_content='flex-start'))
