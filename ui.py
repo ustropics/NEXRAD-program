@@ -25,11 +25,12 @@ def create_widgets():
     lat1 = widgets.FloatText(value=7.5, description='Latitudes:', disabled=False, layout=Layout(width='140px'))
     lat2 = widgets.FloatText(value=7.5, disabled=False, layout=Layout(width='50px'))
     
+    
     # Organize the widgets into layouts
-    start = widgets.HBox([widget_start_date, widget_start_time])
-    end = widgets.HBox([widget_end_date, widget_end_time])
-    lon_box = widgets.HBox([lon1, lon2])
-    lat_box = widgets.HBox([lat1, lat2])
+    start = widgets.HBox([widget_start_date, widget_start_time], layout=Layout(justify_content='flex-start'))
+    end = widgets.HBox([widget_end_date, widget_end_time], layout=Layout(justify_content='flex-start'))
+    lon_box = widgets.HBox([lon1, lon2], layout=Layout(justify_content='flex-start'))
+    lat_box = widgets.HBox([lat1, lat2], layout=Layout(justify_content='flex-start'))
     
     # Return the complete widget box layout
     return widgets.VBox([label1, start, end, lon_box, lat_box])

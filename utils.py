@@ -13,17 +13,33 @@ def widget_values(widget_box):
 #   print(widget_box.children[3].children[1].value)
 #   print(widget_box.children[4].children[0].value)
 #   print(widget_box.children[4].children[1].value)
+
     start_date = widget_box.children[1].children[0].value
     start_time = widget_box.children[1].children[1].value
+
+    end_date = widget_box.children[2].children[0].value
+    end_time = widget_box.children[2].children[1].value
 
     start_year = start_date.year
     start_month = start_date.month
     start_day = start_date.day
     start_time = datetime.strptime(start_time, '%H:%M').time()
 
-    dt1 = datetime(start_year, start_month, start_day, start_time.hour, start_time.minute)
+    end_year = end_date.year
+    end_month = end_date.month
+    end_day = end_date.day
+    end_time = datetime.strptime(end_time, '%H:%M').time()
 
-    print(dt1)
+    dt1 = datetime(start_year, start_month, start_day, start_time.hour, start_time.minute)
+    dt2 = datetime(end_year, end_month, end_day, end_time.hour, end_time.minute)
+
+    lon_1 = widget_box.children[3].children[0].value
+    lon_2 = widget_box.children[3].children[1].value
+
+    lat_1 = widget_box.children[4].children[0].value
+    lat_2 = widget_box.children[4].children[1].value
+
+    return dt1, dt2, lon_1, lon_2, lat_1, lat_2
 
 # Check if values are [-127, 128] and convert to [0, 255] if they are
 def raw_to_masked_float(var, data):
