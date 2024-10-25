@@ -57,5 +57,3 @@ def create_plot(widget_box):
     # Save animation as an HTML5 video
     anim.save("animation.mp4", writer="ffmpeg")
     plt.close(fig)
-
-    return HTML('<video controls><source src="animation.mp4" type="video/mp4"></video>')
