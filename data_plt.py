@@ -1,4 +1,5 @@
 from utils import *
+
 from siphon.radarserver import RadarServer
 from datetime import datetime, timedelta
 from matplotlib.animation import ArtistAnimation, PillowWriter
@@ -8,8 +9,8 @@ import metpy.plots as mpplots
 import cartopy.feature as cfeature
 import matplotlib.pyplot as plt
 
-def create_plot():
-    dt1 = datetime(2016, 6, 8, 18)
+def create_plot(widget_box):
+    dt1, dt2, lon_1, lon_2, lat_1, lat_2 = widget_values(widget_box)
 
     # Load in radar data and variables
     rs = RadarServer('http://tds-nexrad.scigw.unidata.ucar.edu/thredds/radarServer/nexrad/level2/S3/')  # Access THREDDS for data files
