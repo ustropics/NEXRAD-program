@@ -15,15 +15,19 @@ import matplotlib.pyplot as plt
 def create_plot(widget_box):
     dt1, dt2, lon_1, lon_2, lon_3, lat_1, lat_2, lat_3 = widget_values(widget_box)
 
+    # Quick check to see if the user selected a time
     if dt1 == dt2:
         dt2 = dt1 + timedelta(minutes=30)
 
-    # Load in radar data and variables
+    # Load in radar data and variables https://tds-nexrad.scigw.unidata.ucar.edu/thredds/catalog/catalog.html
     rs = RadarServer('http://tds-nexrad.scigw.unidata.ucar.edu/thredds/radarServer/nexrad/level2/S3/')  # Access THREDDS for data files
     query = rs.query()
-    query.lonlat_point(-82.8, 27.6).time_range(dt1, dt2)
+    query.lonlat_point(lon_3, lat_3).time_range(dt1, dt2)
+
+    # Get the colortable and norm for the data
     ref_norm, ref_cmap = mpplots.ctables.registry.get_with_steps('NWSReflectivity', 5, 5)
 
+    # Iterate over the catalog and remotely access the data
     cat = rs.get_catalog(query)
     ds = cat.datasets[0]
     data = ds.remote_access()
@@ -41,15 +45,11 @@ def create_plot(widget_box):
     ax.add_feature(cfeature.BORDERS.with_scale('50m'), edgecolor='white', linewidth=0.4, zorder=11)
     ax.add_feature(cfeature.COASTLINE.with_scale('50m'), edgecolor='white', linewidth=0.4, zorder=12)
 
-    # Path to the county shapefile
+    # Path to the county and road shapefiles
     county_shapefile = 'ne_10m_admin_2_counties.shp'
-
     road_shapefile = 'ne_10m_roads.shp'
-
-    # Add counties as a ShapelyFeature
     counties = ShapelyFeature(Reader(county_shapefile).geometries(),
                             ccrs.PlateCarree(), edgecolor='brown', facecolor='none', linewidth=0.3)
-    
     roads = ShapelyFeature(Reader(road_shapefile).geometries(), ccrs.PlateCarree(), edgecolor='red', facecolor='none', linewidth=0.5)
 
     ax.add_feature(roads, zorder=10)
