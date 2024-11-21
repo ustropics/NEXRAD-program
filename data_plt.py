@@ -68,7 +68,7 @@ def create_plot(widget_box):
 
         # Plot data
         mesh = ax.pcolormesh(x, y, ref, cmap=ref_cmap, norm=ref_norm, zorder=15)
-        text = ax.text(0.7, 0.02, data.time_coverage_start, transform=ax.transAxes, fontdict={'size': 16})
+        text = ax.text(0.6, 0.02, data.time_coverage_start, transform=ax.transAxes, fontdict={'size': 16})
 
         meshes.append((mesh, text))
 
