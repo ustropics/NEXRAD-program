@@ -7,6 +7,9 @@ from IPython.display import HTML
 import matplotlib
 import metpy.plots as mpplots
 import cartopy.feature as cfeature
+from cartopy.io.shapereader import Reader
+from cartopy.feature import ShapelyFeature
+
 import matplotlib.pyplot as plt
 
 def create_plot(widget_box):
@@ -18,7 +21,7 @@ def create_plot(widget_box):
     # Load in radar data and variables
     rs = RadarServer('http://tds-nexrad.scigw.unidata.ucar.edu/thredds/radarServer/nexrad/level2/S3/')  # Access THREDDS for data files
     query = rs.query()
-    query.lonlat_point(-82.8, 27.6).time_range(dt1, dt1 + timedelta(hours=1))
+    query.lonlat_point(-82.8, 27.6).time_range(dt1, dt2)
     ref_norm, ref_cmap = mpplots.ctables.registry.get_with_steps('NWSReflectivity', 5, 5)
 
     cat = rs.get_catalog(query)
@@ -38,6 +41,20 @@ def create_plot(widget_box):
     ax.add_feature(cfeature.BORDERS.with_scale('50m'), edgecolor='white', linewidth=0.4, zorder=11)
     ax.add_feature(cfeature.COASTLINE.with_scale('50m'), edgecolor='white', linewidth=0.4, zorder=12)
 
+    # Path to the county shapefile
+    county_shapefile = 'ne_10m_admin_2_counties.shp'
+
+    road_shapefile = 'ne_10m_roads.shp'
+
+    # Add counties as a ShapelyFeature
+    counties = ShapelyFeature(Reader(county_shapefile).geometries(),
+                            ccrs.PlateCarree(), edgecolor='brown', facecolor='none', linewidth=0.3)
+    
+    roads = ShapelyFeature(Reader(road_shapefile).geometries(), ccrs.PlateCarree(), edgecolor='red', facecolor='none', linewidth=0.5)
+
+    ax.add_feature(roads, zorder=10)
+    ax.add_feature(counties, zorder=10)
+
     meshes = []
     for ds_name in cat.datasets:
         data = cat.datasets[ds_name].remote_access()
@@ -55,8 +72,8 @@ def create_plot(widget_box):
 
         meshes.append((mesh, text))
 
-    anim = ArtistAnimation(fig, meshes, interval=200, blit=True)
+    anim = ArtistAnimation(fig, meshes, interval=500, blit=True)
     
     # Save animation as an HTML5 video
-    anim.save("animation.mp4", writer="ffmpeg")
+    anim.save("animation.gif", writer="pillow")
     plt.close(fig)
